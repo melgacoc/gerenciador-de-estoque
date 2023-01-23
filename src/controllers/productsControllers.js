@@ -5,6 +5,12 @@ const getAll = async (req, res) => {
   res.status(200).json(products);
 };
 
+const getProductById = async (req, res) => {
+  const { id } = req.params;
+  const product = await productsServices.getProductById(id);
+  res.status(200).json(product);
+};
+
 const addNewProduct = async (req, res) => {
   try {
     const { name, quantity } = req.body;
@@ -17,5 +23,6 @@ const addNewProduct = async (req, res) => {
 
 module.exports = {
   getAll,
-  addNewProduct
+  getProductById,
+  addNewProduct,
 };

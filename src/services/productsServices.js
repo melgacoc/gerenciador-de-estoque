@@ -1,4 +1,3 @@
-// const Joi = require('joi');
 const productsModel = require('../models/productsModels');
 
 const getAll = async () => {
@@ -8,21 +7,13 @@ const getAll = async () => {
 
 const getProductById = async (id) => {
   const product = await productsModel.getProductById(id);
-  if (!product) {
-    throw Object.assign(
-      new Error('Product not found'),
-      { code: 402 },
-    );
-  }
+  //
+  return product;
 };
 
-const addNewProduct = async ({ name, quantity }) => {
-  const id = await productsModel.addNewProduct(name, quantity);
-
- // const { erro } = schema.validate({ name, quantity });
- // if (erro) throw { status: 400, message: erro.message };
-
-  return { id, name };
+const addNewProduct = async ({ name }) => {
+  const id = await productsModel.addNewProduct(name);
+  return id;
 };
 
 module.exports = {

@@ -8,6 +8,7 @@ app.get('/', (_request, response) => {
   response.send();
 });
 app.get('/products', productsControllers.getAll);
+app.get('/products/:id', productsControllers.getProductById);
 app.post('/products', productsControllers.addNewProduct);
 
 // não remova essa exportação, é para o avaliador funcionar

@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const productsControllers = require('./controllers/productsControllers');
 
 const app = express();
@@ -9,6 +10,7 @@ app.get('/', (_request, response) => {
 });
 app.get('/products', productsControllers.getAll);
 app.get('/products/:id', productsControllers.getProductById);
+app.use(bodyParser.json());
 app.post('/products', productsControllers.addNewProduct);
 
 // não remova essa exportação, é para o avaliador funcionar

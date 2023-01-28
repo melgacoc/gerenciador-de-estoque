@@ -13,7 +13,7 @@ const getSaleById = async (req, res) => {
 };
 
 const addNewSale = async (req, res) => {
-  const { productId, quantity } = req.body;
+  const [{ productId, quantity }] = req.body;
   const newSale = await salesService.addNewSale(productId, quantity);
   return res.status(201).json(newSale);
 };

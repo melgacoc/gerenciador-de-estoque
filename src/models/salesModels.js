@@ -19,9 +19,9 @@ const getSaleById = async (id) => {
 };
 
 const addNewSale = async (productId, quantity) => {
-  const query = 'INSERT INTO StoreManager.sales_products WHERE product_id=? VALUES (?)';
-  const newSale = await connection.execute(query, [productId, quantity]);
-  return newSale;
+  const query = 'INSERT INTO StoreManager.sales_products (productId, quantity) VALUES (?, ?)';
+  const [newSale] = await connection.execute(query, [productId, quantity]);
+  return newSale.insertId;
 };
 
 module.exports = {

@@ -10,9 +10,10 @@ const getSaleById = async (id) => {
   return sale;
 };
 
-const addNewSale = async (productId, quantity) => {
-  const sale = await salesModels.addNewSale(productId, quantity);
-  return sale;
+const addNewSale = async (sale) => {
+  const id = await salesModels.addNewSale(sale);
+  // const newSale = await salesModels.addNewSale(sale);
+  return { id, sale };
 };
 
 module.exports = {

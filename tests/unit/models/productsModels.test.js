@@ -25,11 +25,11 @@ describe('Teste para a camada Model de Products', function () {
       sinon.restore();
     });
     it('Should return a produtc with specifc ID', async function () {
-      sinon.stub(connection, 'execute').resolves([[productsList[1]]]);
+      sinon.stub(connection, 'execute').resolves([productsList[0]]);
 
-      const result = await productsModels.getProductById();
+      const result = await productsModels.getProductById(1);
 
-      expect(result).to.be.deep.equal(productsList[1]);
+      expect(result).to.be.deep.equal(productsList[0]);
     });
   });
 

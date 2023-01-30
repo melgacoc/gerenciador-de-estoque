@@ -51,9 +51,9 @@ describe('Teste para a camada Service de Products', function () {
     it('Should return the new product id', async function () {
       sinon.stub(productsModels, 'addNewProduct').resolves(4);
 
-      const result = await productsServices.addNewProduct(newProduct);
+      const result = await productsServices.addNewProduct('Manopla do Infinito');
 
-      expect(result).to.be.deep.equal('Manopla do Infinito');
+      expect(result).to.be.deep.equal(newProduct);
     });
   });
 });

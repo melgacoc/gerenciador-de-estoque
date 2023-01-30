@@ -14,6 +14,7 @@ const productsList = [
 ];
 
 const newProduct = {
+  id: 4,
   name: 'Manopla do Infinito'
 };
 

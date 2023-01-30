@@ -2,8 +2,8 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const productsModels = require('../../../src/models/productsModels')
-const { connection } = require('../../../src/models/connection');
-const { productsList, newProduct, attProduct } = require('../models/mocks/productsModels.mock');
+const  connection  = require('../../../src/models/connection');
+const { productsList, newProduct, attProduct } = require('../mocks/productsModels.mock');
 const { expect } = chai;
 
 describe('Teste para a camada Model de Products', function () {
@@ -27,7 +27,7 @@ describe('Teste para a camada Model de Products', function () {
     it('Should return a produtc with specifc ID', async function () {
       sinon.stub(connection, 'execute').resolves([[productsList[1]]]);
 
-      const result = await productsModels.getProdutcById(2);
+      const result = await productsModels.getProductById();
 
       expect(result).to.be.deep.equal(productsList[1]);
     });

@@ -8,8 +8,8 @@ const getAll = async (req, res) => {
 const getProductById = async (req, res) => {
   const { id } = req.params;
   const product = await productsServices.getProductById(id);
-  if (product.length === 0) return res.status(404).json({ message: 'Product not found' });
-  return res.status(200).json(product[0]);
+  if (product === 0) return res.status(404).json({ message: 'Product not found' });
+  return res.status(200).json(product);
 };
 
 const addNewProduct = async (req, res) => {

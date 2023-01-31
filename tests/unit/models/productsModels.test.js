@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const productsModels = require('../../../src/models/productsModels')
 const  connection  = require('../../../src/models/connection');
-const { productsList, newProduct, attProduct } = require('../mocks/productsModels.mock');
+const { productsList, newProduct, attProduct } = require('../mocks/products.mock');
 const { expect } = chai;
 
 describe('Teste para a camada Model de Products', function () {

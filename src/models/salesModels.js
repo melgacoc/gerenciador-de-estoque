@@ -19,10 +19,13 @@ const getSaleById = async (id) => {
 };
 
 const addNewSale = async (productId, quantity) => {
-  const query = 'INSERT INTO StoreManager.sales_products (productId, quantity) VALUES (?, ?)';
+  const query = 'INSERT INTO StoreManager.sales (productId, quantity) VALUES (?, ?)';
   const [newSale] = await connection.execute(query, [productId, quantity]);
   return newSale.insertId;
 };
+
+// criar uma venda;
+// data e hora fazer regra de negocio
 
 module.exports = {
   getAll,

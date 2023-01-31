@@ -9,6 +9,8 @@ const addNewSale = async (req, res) => {
   }));
   const newSale = await salesService.addNewSale(sale);
   return res.status(201).json(newSale);
+  // fazer loop na service
+  // fazer loop pra cadastrar um de cada vez
 };
 
 const getAll = async (req, res) => {

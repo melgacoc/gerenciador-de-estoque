@@ -56,4 +56,19 @@ describe('Teste para a camada Service de Products', function () {
       expect(result).to.be.deep.equal(newProduct);
     });
   });
+
+  describe('Att a product', function () {
+    afterEach(() => {
+      sinon.restore();
+    });
+    it('Should return the att name', async function () {
+      sinon.stub(productsModels, 'attProduct').resolves(1);
+      sinon.stub(productsModels, 'getProductById').resolves(productsList[0]);
+
+      const result = await productsModels.attProduct(1, 'Stomrbreaker');
+
+      expect(result).to.be.deep.equal(1);
+      //expect(result).to.be.deep.equal(1);
+    })
+  });
 });

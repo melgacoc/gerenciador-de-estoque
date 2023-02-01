@@ -51,8 +51,12 @@ describe('Teste para a camada Model de Products', function () {
     afterEach(() => {
       sinon.restore();
     });
-    it('Should uptade a product name and id', async function () {
+    it('Should uptade a product name', async function () {
+      sinon.stub(connection, 'execute').resolves(attProduct)
 
-    })
-  })
+      const result = await productsModels.attProduct(1, 'StormBreaker');
+      
+      expect(result).to.be.deep.equal(attProduct);
+    });
+  });
 });

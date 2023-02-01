@@ -94,4 +94,41 @@ describe('Teste para a camada Controller de Products', function () {
       expect(res.json).to.have.been.calledWithExactly(newProduct);
     });
   });
+
+  describe('Att a product', function () {
+    const req = {};
+    const res = {};
+
+    this.beforeEach(() => {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+    });
+
+    this.afterEach(() => {
+      sinon.restore();
+    });
+    it('Should return the new product name', async function () {
+      req.params = { id: 1 };
+      req.body = { name: 'Stormbreaker' };
+
+      sinon.stub(productsServices, 'attProduct').resolves(attProduct);
+
+      await productsController.attProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(200);
+      expect(res.json).to.have.been.calledWithExactly(attProduct);
+    });
+
+    it('Should return an error with a non exist ID', async function () {
+      req.params = { id: 100 };
+      req.body = { name: 'Stormbreaker' };
+
+      sinon.stub(productsServices, 'attProduct').resolves(undefined);
+
+      await productsController.attProduct(req, res);
+
+      expect(res.status).to.have.been.calledWith(404);
+      expect(res.json).to.have.been.calledWithExactly({ message: 'Product not found' });
+    });
+  });
 })

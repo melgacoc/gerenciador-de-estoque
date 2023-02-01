@@ -14,7 +14,7 @@ const getSaleById = async (id) => {
     + 'FROM StoreManager.sales_products AS a '
     + 'INNER JOIN StoreManager.sales AS b ON a.sale_id = b.id '
     + 'WHERE ? = a.sale_id';
-  const [[sale]] = await connection.execute(query, [id]);
+  const [sale] = await connection.execute(query, [id]);
   return sale;
 };
 

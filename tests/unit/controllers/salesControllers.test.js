@@ -50,18 +50,18 @@ describe('Teste para a camada Controller de Sales', function () {
 
       req.params = { id: 1 };
 
-      sinon.stub(saleServices, 'getSaleById').resolves(salesList[0]);
+      sinon.stub(saleServices, 'getSaleById').resolves([salesList[0],salesList[1]]);
 
       await salesController.getSaleById(req, res);
 
       expect(res.status).to.have.been.calledWith(200);
-      expect(res.json).to.have.been.calledWithExactly(salesList[0]);
+      expect(res.json).to.have.been.calledWithExactly([salesList[0], salesList[1]]);
     });
 
     it('Should return a error', async function () {
       req.params = { id: 100 };
 
-      sinon.stub(saleServices, 'getSaleById').resolves(undefined);
+      sinon.stub(saleServices, 'getSaleById').resolves(0);
 
       await salesController.getSaleById(req, res);
 

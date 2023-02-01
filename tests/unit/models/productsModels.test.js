@@ -25,7 +25,7 @@ describe('Teste para a camada Model de Products', function () {
       sinon.restore();
     });
     it('Should return a produtc with specifc ID', async function () {
-      sinon.stub(connection, 'execute').resolves([productsList[0]]);
+      sinon.stub(connection, 'execute').resolves([[productsList[0]]]); // execute devolve um array dentro de outro array;
 
       const result = await productsModels.getProductById(1);
 

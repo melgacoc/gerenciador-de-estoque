@@ -61,7 +61,7 @@ describe('Teste para a camada Controller de Sales', function () {
     it('Should return a error', async function () {
       req.params = { id: 100 };
 
-      sinon.stub(saleServices, 'getSaleById').resolves(0);
+      sinon.stub(saleServices, 'getSaleById').resolves(undefined);
 
       await salesController.getSaleById(req, res);
 

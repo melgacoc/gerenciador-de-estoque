@@ -61,12 +61,12 @@ describe('Teste para a camada Controller de Products', function () {
     it('Should return a error', async function () {
       req.params = { id: 100 };
 
-      sinon.stub(productsServices, 'getProductById').resolves(0);
+      sinon.stub(productsServices, 'getProductById').resolves(undefined);
 
       await productsController.getProductById(req, res);
 
-      expect(res.status).to.have.been.calledWith(404);
-      expect(res.json).to.have.been.calledWithExactly({ message: 'Product not found' });
+     expect(res.status).to.have.been.calledWith(404);
+     expect(res.json).to.have.been.calledWithExactly({ message: 'Product not found' });
     });
   });
 

@@ -16,11 +16,10 @@ const addNewProduct = async (name) => {
 };
 
 const attProduct = async (id, name) => {
-
   await productsModel.attProduct(id, name);
   const product = await productsModel.getProductById(id);
   return product;
-}
+};
 
 module.exports = {
   getAll,

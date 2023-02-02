@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const saleServices = require('../../../src/services/salesServices')
-const { salesList } = require('../mocks/sales.mock');
+const { salesList, invalidId } = require('../mocks/sales.mock');
 const { expect } = chai;
 chai.use(sinonChai);
 const salesController = require('../../../src/controllers/salesControllers');
@@ -67,6 +67,31 @@ describe('Teste para a camada Controller de Sales', function () {
 
       expect(res.status).to.have.been.calledWith(404);
       expect(res.json).to.have.been.calledWithExactly({ message: 'Sale not found' });
+    });
+  });
+
+  describe('Delete a sale', function () {
+    const req = {};
+    const res = {};
+
+    this.beforeEach(() => {
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns();
+    });
+
+    this.afterEach(() => {
+      sinon.restore();
+    });
+
+    it('Should return a 204 status when a product was successfully deleted', async function () {
+      req.params = { id: 1 };
+
+      sinon.stub(saleServices, 'deleteSale').resolves(invalidId);
+
+      await salesController.deleteSale(req, res);
+
+      expect(res.status).to.have.been.calledOnceWith(204);
+      expect(res.json).to.have.been.calledOnceWithExactly();
     });
   });
 });

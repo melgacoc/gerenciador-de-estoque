@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const productsServices = require('../../../src/services/productsServices')
-const { productsList, newProduct, attProduct } = require('../mocks/products.mock');
+const { productsList, newProduct, attProduct, delProduct, invalidId } = require('../mocks/products.mock');
 const { expect } = chai;
 const productsModels = require('../../../src/models/productsModels');
 chai.use(sinonChai);
@@ -73,5 +73,35 @@ describe('Teste para a camada Service de Products', function () {
       expect(result).to.be.deep.equal(attProduct);
       //expect(result).to.be.deep.equal(1);
     })
+  });
+
+  describe('Delete a produc', function () {
+    afterEach(() => {
+      sinon.restore();
+    });
+    it('Should delete a product from DB', async function () {
+      sinon.stub(productsModels, 'getProductById').resolves(3);
+      sinon.stub(productsModels, 'deleteProduct').resolves(delProduct);
+
+      const result = await productsServices.deleteProduct(3);
+
+      expect(result).to.be.deep.equal(delProduct);
+    });
+
+    it('Should return an error when the id doesnt exists', async function () {
+      describe('Delete a produc', function () {
+        afterEach(() => {
+          sinon.restore();
+        });
+        it('Should delete a product from DB', async function () {
+          sinon.stub(productsModels, 'getProductById').resolves(100);
+
+          const result = await productsServices.deleteProduct(100);
+
+          //expect(result.type).to.be.equal(404);
+          expect(result).to.be.deep.equal(invalidId);
+        });
+      });
+    });
   });
 });

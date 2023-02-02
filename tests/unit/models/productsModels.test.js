@@ -3,7 +3,7 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const productsModels = require('../../../src/models/productsModels')
 const  connection  = require('../../../src/models/connection');
-const { productsList, newProduct, attProduct } = require('../mocks/products.mock');
+const { productsList, newProduct, attProduct, delProduct } = require('../mocks/products.mock');
 const { expect } = chai;
 
 describe('Teste para a camada Model de Products', function () {
@@ -55,8 +55,21 @@ describe('Teste para a camada Model de Products', function () {
       sinon.stub(connection, 'execute').resolves(attProduct)
 
       const result = await productsModels.attProduct(1, 'StormBreaker');
-      
+
       expect(result).to.be.deep.equal(attProduct);
+    });
+  });
+
+  describe('Delete a product', function () {
+    afterEach(() => {
+      sinon.restore();
+    });
+    it('Should delete a product from DB', async function () {
+      sinon.stub(connection, 'execute').resolves([productsList[2]]);
+
+      const result = await productsModels.deleteProduct(3);
+
+      expect(result).to.be.deep.equal(delProduct);
     });
   });
 });

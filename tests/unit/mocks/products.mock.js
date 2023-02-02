@@ -23,8 +23,27 @@ const attProduct = {
   name: 'Stormbreaker'
 };
 
+const delProduct = {
+  id: 3,
+  name: 'Escudo do Capitão América'
+};
+
+const invalidId = {
+  affectedRows: 0,
+  fieldCount: 0,
+  info: "",
+  insertId: 0,
+  serverStatus: 2,
+  warningStatus: 0,
+};
+
+const resp = { type: 404, message: 'Product not found' };
+
 module.exports = {
   productsList,
   newProduct,
   attProduct,
+  delProduct,
+  invalidId,
+  resp,
 };

@@ -18,8 +18,15 @@ const addNewProduct = async (name) => {
 const attProduct = async (id, name) => {
   await productsModel.attProduct(id, name);
   const product = await productsModel.getProductById(id);
-  console.log(product);
   return product;
+};
+
+const deleteProduct = async (id) => {
+  const product = await productsModel.getProductById(id);
+  if (!product) return { type: 404, message: 'Product not found' };
+
+  const delProduct = await productsModel.deleteProduct(id);
+  return delProduct;
 };
 
 module.exports = {
@@ -27,4 +34,5 @@ module.exports = {
   getProductById,
   addNewProduct,
   attProduct,
+  deleteProduct,
 };

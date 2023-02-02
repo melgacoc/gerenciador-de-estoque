@@ -16,8 +16,17 @@ const addNewSale = async (sale) => {
   return { id, sale };
 };
 
+const deleteSale = async (id) => {
+  const sale = await salesModels.getSaleById(id);
+  if (sale.length === 0) return { type: 404, message: 'Sale not found' };
+
+  const delSale = await salesModels.deleteSale(id);
+  return delSale;
+};
+
 module.exports = {
   getAll,
   getSaleById,
   addNewSale,
+  deleteSale,
 };

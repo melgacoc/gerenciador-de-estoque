@@ -5,6 +5,7 @@ const productsServices = require('../../../src/services/productsServices')
 const { productsList, newProduct, attProduct } = require('../mocks/products.mock');
 const { expect } = chai;
 const productsModels = require('../../../src/models/productsModels');
+chai.use(sinonChai);
 
 describe('Teste para a camada Service de Products', function () {
   describe('Get all products', function () {
@@ -62,12 +63,14 @@ describe('Teste para a camada Service de Products', function () {
       sinon.restore();
     });
     it('Should return the att name', async function () {
-      sinon.stub(productsModels, 'attProduct').resolves(1);
-      sinon.stub(productsModels, 'getProductById').resolves(productsList[0]);
+     const attproductmodel =  sinon.stub(productsModels, 'attProduct').resolves(1);
+      sinon.stub(productsModels, 'getProductById').resolves(attProduct);
 
-      const result = await productsModels.attProduct(1, 'Stomrbreaker');
+      const result = await productsServices.attProduct(1, 'Stormbreaker');
 
-      expect(result).to.be.deep.equal(1);
+      expect(attproductmodel).to.have.been.calledOnceWithExactly(1, 'Stormbreaker');
+
+      expect(result).to.be.deep.equal(attProduct);
       //expect(result).to.be.deep.equal(1);
     })
   });

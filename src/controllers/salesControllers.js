@@ -1,5 +1,7 @@
 const salesService = require('../services/salesServices');
 
+// fazer loop na service
+// fazer loop pra cadastrar um de cada vez
 const addNewSale = async (req, res) => {
  // const [{ productId, quantity }] = req.body;
   const params = req.body;
@@ -9,8 +11,6 @@ const addNewSale = async (req, res) => {
   }));
   const newSale = await salesService.addNewSale(sale);
   return res.status(201).json(newSale);
-  // fazer loop na service
-  // fazer loop pra cadastrar um de cada vez
 };
 
 const getAll = async (req, res) => {
@@ -27,8 +27,18 @@ const getSaleById = async (req, res) => {
     return res.status(404).json({ message: 'Sale not found' });
 };
 
+const deleteSale = async (req, res) => {
+  const { id } = req.params;
+
+  const { type, message } = await salesService.deleteSale(id);
+
+  if (type) return res.status(404).json({ message });
+  return res.status(204).json();
+};
+
 module.exports = {
   getAll,
   getSaleById,
   addNewSale,
+  deleteSale,
 };

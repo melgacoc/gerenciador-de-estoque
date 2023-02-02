@@ -27,8 +27,15 @@ const addNewSale = async (productId, quantity) => {
 // criar uma venda;
 // data e hora fazer regra de negocio
 
+const deleteSale = async (id) => {
+  const query = 'DELETE FROM StoreManager.sales WHERE id=?';
+  const delSale = await connection.execute(query, [id]);
+  return delSale;
+};
+
 module.exports = {
   getAll,
   getSaleById,
   addNewSale,
+  deleteSale,
 };

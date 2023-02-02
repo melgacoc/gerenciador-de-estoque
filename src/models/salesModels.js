@@ -33,9 +33,22 @@ const deleteSale = async (id) => {
   return delSale;
 };
 
+const attSale = async (id, newInfo) => {
+  const query = 'UPTADE StoreManager.sales_products SET quantity =? WHERE '
+    + 'sale_id =? AND product_id =?';
+
+  await newInfo.map((async (sale) => {
+    const { productId, quantity } = sale;
+    await connection.query(query, [quantity, id, productId]);
+  }));
+
+  return newInfo;
+};
+
 module.exports = {
   getAll,
   getSaleById,
   addNewSale,
   deleteSale,
+  attSale,
 };

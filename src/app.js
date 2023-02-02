@@ -11,6 +11,7 @@ app.get('/', (_request, response) => {
   response.send();
 });
 app.use(express.json());
+app.get('/products/search', productsControllers.searchProduct);
 app.get('/products', productsControllers.getAll);
 app.get('/sales', salesControllers.getAll);
 app.get('/products/:id', productsControllers.getProductById);
@@ -23,6 +24,9 @@ app.post('/sale', nameValidation.nameValidation,
 app.put('/products/:id', nameValidation.nameValidation, productsControllers.attProduct);
 app.delete('/products/:id', productsControllers.deleteProduct);
 app.delete('/sales/:id', salesControllers.deleteSale);
+app.put('/sales/:id', nameValidation.nameValidation,
+  salesValidation.idValidation, salesValidation.quantityValidation,
+  salesControllers.attSale);
 
 // não remova essa exportação, é para o avaliador funcionar
 // você pode registrar suas rotas normalmente, como o exemplo acima

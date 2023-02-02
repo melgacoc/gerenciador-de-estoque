@@ -29,10 +29,21 @@ const deleteProduct = async (id) => {
   return delProduct;
 };
 
+const searchProduct = async (q) => {
+  const products = await productsModel.getAll();
+  console.log(products);
+  const search = products.filter((e) => {
+    console.log(e);
+    return e.name.includes(q);
+  });
+  return search;
+};
+
 module.exports = {
   getAll,
   getProductById,
   addNewProduct,
   attProduct,
   deleteProduct,
+  searchProduct,
 };

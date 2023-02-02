@@ -24,9 +24,16 @@ const deleteSale = async (id) => {
   return delSale;
 };
 
+const attSale = async (id, neInfos) => {
+  await salesModels.attSale(id, neInfos);
+  const sale = await salesModels.getSaleById(id);
+  return sale;
+};
+
 module.exports = {
   getAll,
   getSaleById,
   addNewSale,
   deleteSale,
+  attSale,
 };
